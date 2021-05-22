@@ -2,6 +2,7 @@ package com.rodolfoamaral.casevsm.entidades;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,41 +19,63 @@ public class Cidades implements Serializable{
 	@NotNull
 	private String nome;
 	@NotNull
-	private String estado;
+	@Column(name = "nome_estado")
+	private String nomeEstado;
+	@Column(name = "sigla_estado", length = 2)
+	private String siglaEstado;
 	
 	public Cidades() {
 	}
 
-	public Cidades(Long id, String nome, String estado) {
+	
+	public Cidades(Long id, @NotNull String nome, @NotNull String nomeEstado, String siglaEstado) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.estado = estado;
+		this.nomeEstado = nomeEstado;
+		this.siglaEstado = siglaEstado;
 	}
+
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public String getSigla() {
+
+	public String getNome() {
 		return nome;
 	}
 
-	public void setSigla(String sigla) {
-		this.nome = sigla;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public String getEstado() {
-		return estado;
+
+	public String getNomeEstado() {
+		return nomeEstado;
 	}
 
-	public void setNome(String estado) {
-		this.estado = estado;
+
+	public void setNomeEstado(String nomeEstado) {
+		this.nomeEstado = nomeEstado;
 	}
+
+
+	public String getSiglaEstado() {
+		return siglaEstado;
+	}
+
+
+	public void setSiglaEstado(String siglaEstado) {
+		this.siglaEstado = siglaEstado;
+	}
+
 
 	@Override
 	public int hashCode() {
