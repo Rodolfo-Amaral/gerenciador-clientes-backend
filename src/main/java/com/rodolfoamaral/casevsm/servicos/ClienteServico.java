@@ -6,10 +6,11 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.rodolfoamaral.casevsm.entidades.Cliente;
-import com.rodolfoamaral.casevsm.entidades.enums.EnumStatus;
 import com.rodolfoamaral.casevsm.exceptions.ClienteNaoEncontrado;
 import com.rodolfoamaral.casevsm.repositories.ClienteRepositorio;
 
@@ -24,15 +25,13 @@ public class ClienteServico {
 		return repositorio.findAll();
 	}
 	
-	/*
-	public Page<ClienteDTO> listarTodos(Pageable pageable){
-		repositorio.listarTodos(pageable);
-		Page<ClienteDTO> clientes = repositorio.listarTodos(pageable);
-		return clientes.map(x -> new ClienteDTO());
-	}*/
 	
-	public List<Cliente> listarTodosAtivos(){
-		return repositorio.listarTodosAtivos(EnumStatus.ATIVO);
+	public Page<Cliente> listarTodos(Pageable pageable){
+		return repositorio.findAll(pageable);
+	}
+	
+	public Page<Cliente> listarTodosAtivos(Pageable pageable){
+		return repositorio.listarTodos(pageable);
 	}
 	
 	//PESQUISAR CLIENT PELA ID

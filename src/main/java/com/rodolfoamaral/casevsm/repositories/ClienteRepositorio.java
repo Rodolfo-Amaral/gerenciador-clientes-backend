@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.rodolfoamaral.casevsm.entidades.Cliente;
-import com.rodolfoamaral.casevsm.entidades.dto.ClienteDTO;
 import com.rodolfoamaral.casevsm.entidades.enums.EnumStatus;
 
 @Repository
@@ -24,5 +23,5 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Long>{
 	@Query("SELECT new com.rodolfoamaral.casevsm.entidades.dto.ClienteDTO(c.id, c.nome, c.cpfCnpj, c.sexo, c.cidade, c.estado, "
 			+ " c.logradouro, c.numero, c.bairro, c.cep, c.complemento, c.fone, c.email, c.estadoCivil, c.dataCadastro, c.status) "
 			+ " FROM Cliente c ")
-	Page<ClienteDTO> listarTodos(Pageable pageable);	
+	Page<Cliente> listarTodos(Pageable pageable);	
 }

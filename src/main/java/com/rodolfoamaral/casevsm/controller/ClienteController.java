@@ -4,6 +4,9 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.rodolfoamaral.casevsm.entidades.Cliente;
+import com.rodolfoamaral.casevsm.entidades.dto.ClienteDTO;
+import com.rodolfoamaral.casevsm.entidades.dto.FiltroDTO;
 import com.rodolfoamaral.casevsm.servicos.ClienteServico;
 
 @RestController //indicar que é um recurso web de Clientes
@@ -25,19 +30,21 @@ public class ClienteController {
 	private ClienteServico servico;
 	
 	//Pesquisar Clientes
+	/*
 	@GetMapping
 	public List<Cliente> listarTodos(){
 		return servico.listarTodos();
-		
-	}
-	/*public ResponseEntity<Page<ClienteDTO>> listarTodos(Pageable pageable) {
-		Page<ClienteDTO> lista = servico.listarTodos(pageable);
-		return ResponseEntity.ok(lista);
 	}*/
 	
+	@GetMapping
+	public ResponseEntity<Page<Cliente>> listarTodos(FiltroDTO<Cliente> id, Pageable pageable) {
+		Page<Cliente> lista = servico.listarTodos(pageable);
+		return ResponseEntity.ok(lista);
+	}
+	
 	@GetMapping("/listarAtivos")
-	public ResponseEntity<List<Cliente>> listarTodosAtivos(){
-		List<Cliente> lista = servico.listarTodosAtivos();
+	public ResponseEntity<Page<Cliente>> listarTodosAtivos(FiltroDTO<Cliente> id, Pageable pageable){
+		Page<Cliente> lista = servico.listarTodosAtivos(pageable);
 		return ResponseEntity.ok().body(lista);
 	}
 	

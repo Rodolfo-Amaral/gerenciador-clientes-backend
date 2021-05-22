@@ -31,10 +31,8 @@ public class Testes implements CommandLineRunner {
 	Cliente cli2 = new Cliente(null, "Camila Alves", "10987654321", "Feminino", "Assis", "SP", "R. Filomena C. Longo", 36, "San Fernando Valley", "19800425", "CASA", "18996362736", "avles.camila456@gmail.com", "Casada", LocalDateTime.now(), EnumStatus.ATIVO);
 	repoCliente.saveAll(Arrays.asList(cli1, cli2));
 	
-	Cidades estado1 = new Cidades(null, "AC", "Acre");
-	Cidades estado2 = new Cidades(null, "SP", "São Paulo");
-	repoEst.saveAll(Arrays.asList(estado1, estado2));
-	
-	
+	Cidades cid1 = new Cidades(null, "Assis", "SP");
+	Cidades cid2 = new Cidades(null, "Adamantina", "São Paulo");
+	repoEst.saveAll(Arrays.asList(cid1, cid2));	
 	}
 }
