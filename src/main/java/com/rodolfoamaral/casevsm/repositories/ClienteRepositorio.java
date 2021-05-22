@@ -1,6 +1,5 @@
 package com.rodolfoamaral.casevsm.repositories;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -17,11 +16,12 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Long>{
 	
 	Optional<Cliente> findByCpfCnpj(String cpfCnpj);
 
-	@Query("FROM Cliente WHERE status = :status")
-	List<Cliente> listarTodosAtivos(EnumStatus status);
+	@Query("SELECT c.nome FROM Cliente c WHERE c.status =:status")
+	Page<Cliente> listarTodosAtivos(Pageable pageable, EnumStatus status);
 
-	@Query("SELECT new com.rodolfoamaral.casevsm.entidades.dto.ClienteDTO(c.id, c.nome, c.cpfCnpj, c.sexo, c.cidade, c.estado, "
-			+ " c.logradouro, c.numero, c.bairro, c.cep, c.complemento, c.fone, c.email, c.estadoCivil, c.dataCadastro, c.status) "
+	@Query("SELECT new com.rodolfoamaral.casevsm.entidades.dto.ClienteDTO(c.id, c.nome, c.cpfCnpj, c.nascimento, c.sexo, "
+			+ " c.logradouro, c.numero, c.bairro, c.cep, c.complemento, c.fone, c.email, c.estadoCivil, c.dataCadastro, c.status, "
+			+ "c.nomeCidade) "
 			+ " FROM Cliente c ")
 	Page<Cliente> listarTodos(Pageable pageable);	
 }

@@ -1,6 +1,7 @@
 package com.rodolfoamaral.casevsm.entidades;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -8,7 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rodolfoamaral.casevsm.entidades.enums.EnumStatus;
@@ -25,13 +32,12 @@ public class Cliente implements Serializable {
 	@NotNull
 	@Column(length = 14)
 	private String cpfCnpj;
-	/*
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "UTC")
-	private Instant nascimento;
-	*/
+	@NotNull
+	@DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
+	@Column(name= "data_nascimento", nullable = false, columnDefinition = "DATE")
+	private LocalDate nascimento;
+	
 	private String sexo;
-	private String cidade;
-	private String estado;
 	private String logradouro;
 	private Integer numero;
 	private String bairro;
@@ -44,25 +50,27 @@ public class Cliente implements Serializable {
 	
 	private String email;
 	private String estadoCivil;
-	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column(name = "DATA_CADASTRO")
 	private LocalDateTime dataCadastro;
+	
 	private EnumStatus status;
-		
+	@ManyToOne
+	@JoinColumn(name = "cidade_nome")
+	private Cidades nomeCidade;
+	
 	public Cliente() {
 	}
-
-
-	public Cliente(Long id, @NotNull String nome, @NotNull String cpfCnpj, String sexo, String cidade, String estado,
+	
+	public Cliente(Long id, @NotNull String nome, @NotNull String cpfCnpj,
+			@NotNull @PastOrPresent(message = "{PastOrPresent.cliente.nascimento}") LocalDate nascimento, String sexo,
 			String logradouro, Integer numero, String bairro, String cep, String complemento, String fone, String email,
-			String estadoCivil, LocalDateTime dataCadastro, EnumStatus status) {
+			String estadoCivil, LocalDateTime dataCadastro, EnumStatus status, Cidades nomeCidade) {
 		this.id = id;
 		this.nome = nome;
 		this.cpfCnpj = cpfCnpj;
+		this.nascimento = nascimento;
 		this.sexo = sexo;
-		this.cidade = cidade;
-		this.estado = estado;
 		this.logradouro = logradouro;
 		this.numero = numero;
 		this.bairro = bairro;
@@ -73,8 +81,8 @@ public class Cliente implements Serializable {
 		this.estadoCivil = estadoCivil;
 		this.dataCadastro = dataCadastro;
 		this.status = status;
+		this.nomeCidade = nomeCidade;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -92,44 +100,28 @@ public class Cliente implements Serializable {
 		this.nome = nome;
 	}
 
-	public @NotNull String getCpfCnpj() {
+	public String getCpfCnpj() {
 		return cpfCnpj;
 	}
 
-	public void setCpf(@NotNull String cpf_cnpj) {
-		this.cpfCnpj = cpf_cnpj;
+	public void setCpfCnpj(String cpfCnpj) {
+		this.cpfCnpj = cpfCnpj;
 	}
-/*
-	public Instant getNascimento() {
+
+	public LocalDate getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(Instant nascimento) {
+	public void setNascimento(LocalDate nascimento) {
 		this.nascimento = nascimento;
 	}
-*/	
+
 	public String getSexo() {
 		return sexo;
 	}
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getEstado() {
-		return estado;
-	}
-
-	public void setEstado(String estado) {
-		this.estado = estado;
 	}
 
 	public String getLogradouro() {
@@ -164,16 +156,16 @@ public class Cliente implements Serializable {
 		this.cep = cep;
 	}
 
-	public String getFone() {
-		return fone;
-	}
-
 	public String getComplemento() {
 		return complemento;
 	}
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+	public String getFone() {
+		return fone;
 	}
 
 	public void setFone(String fone) {
@@ -195,7 +187,7 @@ public class Cliente implements Serializable {
 	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
-	
+
 	public LocalDateTime getDataCadastro() {
 		return dataCadastro;
 	}
@@ -211,7 +203,15 @@ public class Cliente implements Serializable {
 	public void setStatus(EnumStatus status) {
 		this.status = status;
 	}
-	
+
+	public Cidades getNomeCidade() {
+		return nomeCidade;
+	}
+
+	public void setNomeCidade(Cidades nomeCidade) {
+		this.nomeCidade = nomeCidade;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.rodolfoamaral.casevsm.entidades.Cliente;
+import com.rodolfoamaral.casevsm.entidades.enums.EnumStatus;
 import com.rodolfoamaral.casevsm.exceptions.ClienteNaoEncontrado;
 import com.rodolfoamaral.casevsm.repositories.ClienteRepositorio;
 
@@ -30,8 +31,8 @@ public class ClienteServico {
 		return repositorio.findAll(pageable);
 	}
 	
-	public Page<Cliente> listarTodosAtivos(Pageable pageable){
-		return repositorio.listarTodos(pageable);
+	public Page<Cliente> listarTodosAtivos(Pageable pageable, EnumStatus status){
+		return repositorio.listarTodosAtivos(pageable, status);
 	}
 	
 	//PESQUISAR CLIENT PELA ID

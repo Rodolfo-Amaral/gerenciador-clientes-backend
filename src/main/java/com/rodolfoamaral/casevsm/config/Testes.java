@@ -1,5 +1,6 @@
 package com.rodolfoamaral.casevsm.config;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -8,29 +9,25 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.rodolfoamaral.casevsm.entidades.Cliente;
 import com.rodolfoamaral.casevsm.entidades.Cidades;
+import com.rodolfoamaral.casevsm.entidades.Cliente;
 import com.rodolfoamaral.casevsm.entidades.enums.EnumStatus;
-import com.rodolfoamaral.casevsm.repositories.ClienteRepositorio;
 import com.rodolfoamaral.casevsm.repositories.CidadesRepositorio;
+import com.rodolfoamaral.casevsm.repositories.ClienteRepositorio;
 
 @Configuration
 @Profile("test")
 public class Testes implements CommandLineRunner {
 	
 	@Autowired
-	private ClienteRepositorio repoCliente;
+	private CidadesRepositorio repoCid;
 	
 	@Autowired
-	private CidadesRepositorio repoEst;
+	private ClienteRepositorio repoCliente;
 	
 	
 	@Override
-	public void run(String... args) throws Exception {		
-	Cliente cli1 = new Cliente(null, "Rodolfo Amaral", "12345678910", "Masculino", "Assis", "SP", "Av. Dom Antonio", 1505, "Vila Tênis Clube", "19806173", "3º Andar", "183402-0000", "rodolfocornieri@gmail.com", "Casado", LocalDateTime.now(), EnumStatus.ATIVO);
-	Cliente cli2 = new Cliente(null, "Camila Alves", "10987654321", "Feminino", "Assis", "SP", "R. Filomena C. Longo", 36, "San Fernando Valley", "19800425", "CASA", "18996362736", "avles.camila456@gmail.com", "Casada", LocalDateTime.now(), EnumStatus.ATIVO);
-	repoCliente.saveAll(Arrays.asList(cli1, cli2));
-	
+	public void run(String... args) throws Exception {			
 	Cidades cid1 = new Cidades(null, "Assis", "São Paulo", "SP");
 	Cidades cid2 = new Cidades(null, "Adamantina", "São Paulo", "SP");
 	Cidades cid3 = new Cidades(null, "Cândido Mota", "São Paulo", "SP");
@@ -53,7 +50,12 @@ public class Testes implements CommandLineRunner {
 	Cidades cid20 = new Cidades(null, "Manaus", "Amazonas", "AM");
 	Cidades cid21 = new Cidades(null, "Natal", "Rio Grande do Norte", "RN");
 	Cidades cid22 = new Cidades(null, "Cuiabá", "Mato Grosso", "MT");
-	repoEst.saveAll(Arrays.asList(cid1, cid2, cid3, cid4, cid5, cid6, cid7, cid8, cid9, cid10, cid11, 
+	repoCid.saveAll(Arrays.asList(cid1, cid2, cid3, cid4, cid5, cid6, cid7, cid8, cid9, cid10, cid11, 
 			cid12, cid13, cid14, cid15, cid16, cid17, cid18, cid19, cid20, cid21, cid22));	
+	
+	Cliente cli1 = new Cliente(null, "Rodolfo Amaral", "39770913871", LocalDate.of(1996, 12, 26) , "Masculino", "Av. Dom Antonio", 1505, 
+			"Vila Tênis Clube", "19806173", "3º Andar",	"18997858509", "rodolfocornieri@gmail.com", "Casado",
+			LocalDateTime.now(), EnumStatus.ATIVO, cid1);
+	repoCliente.saveAll(Arrays.asList(cli1));
 	}
 }

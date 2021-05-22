@@ -21,8 +21,8 @@ public class CidadeServico {
 		return repositorio.findAll(pageable);
 	}
 	
-	public Cidades findNome(String nome) {
-		Optional<Cidades> cidade = repositorio.findByNome(nome);
+	public Cidades findNome(String nomeCidade) {
+		Optional<Cidades> cidade = repositorio.findByNomeCidade(nomeCidade);
 		return cidade.orElseThrow(() -> new CidadeNaoEncontrada(cidade));
 	}
 }

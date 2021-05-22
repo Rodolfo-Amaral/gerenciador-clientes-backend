@@ -1,28 +1,33 @@
 {
-        "id": 1,
-        "nome": "Rodolfo Amaral",
-        "cpfCnpj": "12345678910",
-        "sexo": "Masculino",
-		"cidade": "Assis",
-		"estado": "SP",
-        "logradouro": "Av. Dom Antonio",
-        "numero": 1505,
-        "bairro": "Vila Tênis Clube",
-        "cep": "19806173",
-        "complemento": "3º Andar",
-        "fone": "183402-0000",
-        "email": "rodolfocornieri@gmail.com",
-        "estadoCivil": "Casado",
-        "dataCadastro": "19/05/2021 19:34:35",
-        "status": "ATIVO"
-    },
+    {
+	"id": 1,
+	"nome": "Rodolfo Amaral",
+	"cpfCnpj": "39770913871",
+	"nascimento": "1996-12-26",
+	"sexo": "Masculino",
+	"logradouro": "Av. Dom Antonio",
+	"numero": 1505,
+	"bairro": "Vila Tênis Clube",
+	"cep": "19806173",
+	"complemento": "3º Andar",
+	"fone": "18997858509",
+	"email": "rodolfocornieri@gmail.com",
+	"estadoCivil": "Casado",
+	"dataCadastro": "22/05/2021 16:10:45",
+	"status": "ATIVO",
+	"nomeCidade": {
+		"id": 1,
+		"nomeCidade": "Assis",
+		"nomeEstado": "São Paulo",
+		"siglaEstado": "SP"
+		}
+	},
    {
     "id": 2,
     "nome": "Camila Alves",
     "cpfCnpj": "10987654321",
+	"nascimento": "1998-08-27",
     "sexo": "Feminino",
-    "cidade": "Assis",
-    "estado": "SP",
     "logradouro": "R. Filomena C. Longo",
     "numero": 36,
     "bairro": "San Fernando Valley",
@@ -32,14 +37,19 @@
     "email": "avles.camila456@gmail.com",
     "estadoCivil": "Casada",
     "dataCadastro": "19/05/2021 20:59:50",
-    "status": "INATIVO"
-   },
+    "status": "INATIVO",
+	"nomeCidade": {
+		"id": 1,
+		"nomeCidade": "Assis",
+		"nomeEstado": "São Paulo",
+		"siglaEstado": "SP"
+	}
+    },
    {
     "nome": "Jairo Messias",
     "cpfCnpj": "12112112121",
+	"nascimento": "2020-10-05",
     "sexo": "Masculino",
-    "cidade": "Assis",
-    "estado": "SP",
     "logradouro": "R. Filomena C. Longo",
     "numero": 36,
     "bairro": "San Fernando Valley",
@@ -49,14 +59,19 @@
     "email": "jairo_messias@yahoo.com",
     "estadoCivil": "Solteiro",
     "dataCadastro": "19/05/2021 20:59:50",
-    "status": "ATIVO"
+    "status": "ATIVO",
+	"nomeCidade": {
+		"id": 2,
+		"nomeCidade": "Adamantina",
+		"nomeEstado": "São Paulo",
+		"siglaEstado": "SP"
+	}
    },
    {
     "nome": "Kira Michelle",
     "cpfCnpj": "44444444441",
+	"nascimento": "2020-11-18",
     "sexo": "Feminino",
-    "cidade": "Assis",
-    "estado": "SP",
     "logradouro": "R. Filomena C. Longo",
     "numero": 36,
     "bairro": "San Fernando Valley",
@@ -66,6 +81,12 @@
     "email": "kira_michelle@hotmail.com",
     "estadoCivil": "Solteiro",
     "dataCadastro": "19/05/2021 20:59:50",
-	"status": "ATIVO"
+	"status": "ATIVO",
+	"nomeCidade": {
+		"id": 1,
+		"nomeCidade": "Assis",
+		"nomeEstado": "São Paulo",
+		"siglaEstado": "SP"
+   }
    }
 }

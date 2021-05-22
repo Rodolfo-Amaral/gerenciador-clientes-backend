@@ -8,5 +8,5 @@ import com.rodolfoamaral.casevsm.entidades.Cidades;
 
 public interface CidadesRepositorio extends JpaRepository<Cidades, Long> {
 
-	Optional<Cidades> findByNome(String nome);	
+	Optional<Cidades> findByNomeCidade(String nomeCidade);	
 }
