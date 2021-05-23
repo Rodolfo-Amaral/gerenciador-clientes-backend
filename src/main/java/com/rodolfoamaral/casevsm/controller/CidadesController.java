@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rodolfoamaral.casevsm.entidades.Cidades;
 import com.rodolfoamaral.casevsm.entidades.dto.FiltroDTO;
-import com.rodolfoamaral.casevsm.exceptions.CidadeNaoEncontrada;
 import com.rodolfoamaral.casevsm.servicos.CidadeServico;
 
 @RestController
@@ -27,9 +26,10 @@ public class CidadesController {
 		return ResponseEntity.ok().body(listaEst); 
 	}
 	
-	@GetMapping(value = "/{nome}")
-	public ResponseEntity<Cidades> findById(@PathVariable String nome) throws CidadeNaoEncontrada{
-		Cidades cidades = servico.findNome(nome);
-		return ResponseEntity.ok().body(cidades);
+	@GetMapping(value = "/{nomeCidade}")
+	public ResponseEntity<Cidades> pesquisaDoc(@PathVariable String nomeCidade){
+		Cidades nomeCid = servico.pesquisaNome(nomeCidade);
+		return ResponseEntity.ok().body(nomeCid);
 	}
+	
 }

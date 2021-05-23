@@ -20,9 +20,10 @@ public class CidadeServico {
 	public Page<Cidades> findAll(Pageable pageable){
 		return repositorio.findAll(pageable);
 	}
-	
-	public Cidades findNome(String nomeCidade) {
-		Optional<Cidades> cidade = repositorio.findByNomeCidade(nomeCidade);
-		return cidade.orElseThrow(() -> new CidadeNaoEncontrada(cidade));
+	//Pesquisa por nome da cidade
+	public Cidades pesquisaNome(String nomeCidade) {
+		Optional<Cidades> nomeCid = repositorio.findByNomeCidade(nomeCidade);
+		return nomeCid.orElseThrow(() -> new CidadeNaoEncontrada(nomeCidade));
 	}
+	
 }

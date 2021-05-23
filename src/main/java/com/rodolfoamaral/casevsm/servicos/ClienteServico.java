@@ -44,7 +44,7 @@ public class ClienteServico {
 	//PESQUISAR POR CPF
 	public Cliente pesquisaCPF(String cpfCnpj) {
 		Optional<Cliente> cliCpf = repositorio.findByCpfCnpj(cpfCnpj);
-		return cliCpf.get();
+		return cliCpf.orElseThrow(() -> new ClienteNaoEncontrado(cliCpf));
 	}
 	
 	
