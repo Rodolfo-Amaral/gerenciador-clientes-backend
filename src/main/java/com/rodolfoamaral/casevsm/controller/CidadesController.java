@@ -22,14 +22,19 @@ public class CidadesController {
 	
 	@GetMapping
 	public ResponseEntity<Page<Cidades>> findAll(FiltroDTO<Cidades> id, Pageable pageable){
-		Page<Cidades> listaEst = servico.findAll(pageable);
-		return ResponseEntity.ok().body(listaEst); 
+		Page<Cidades> lista = servico.findAll(pageable);
+		return ResponseEntity.ok().body(lista); 
 	}
 	
 	@GetMapping(value = "/{nomeCidade}")
-	public ResponseEntity<Cidades> pesquisaDoc(@PathVariable String nomeCidade){
-		Cidades nomeCid = servico.pesquisaNome(nomeCidade);
-		return ResponseEntity.ok().body(nomeCid);
+	public Cidades findByNomeCidade(@PathVariable String nomeCidade){
+		return servico.pesquisaNome(nomeCidade);
+	}
+	
+	@GetMapping(value = "/estados/{siglaEstado}")
+	public ResponseEntity<Page<Cidades>> findBySiglaEstado(@PathVariable String siglaEstado, Pageable pageable){
+		Page<Cidades> siglas = servico.findBySiglaEstado(pageable, siglaEstado);
+		return ResponseEntity.ok().body(siglas);
 	}
 	
 }

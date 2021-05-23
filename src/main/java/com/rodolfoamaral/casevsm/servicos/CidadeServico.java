@@ -25,5 +25,9 @@ public class CidadeServico {
 		Optional<Cidades> nomeCid = repositorio.findByNomeCidade(nomeCidade);
 		return nomeCid.orElseThrow(() -> new CidadeNaoEncontrada(nomeCidade));
 	}
-	
+
+	//Pesquisa por sigla do estado
+	public Page<Cidades> findBySiglaEstado(Pageable pageable, String siglaEstado){
+		return repositorio.findBySiglaEstado(pageable, siglaEstado);
+	}
 }
