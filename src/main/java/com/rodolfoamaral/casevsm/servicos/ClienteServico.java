@@ -73,14 +73,18 @@ public class ClienteServico {
 	//Campos do cadastro do cliente que permitem edição
 	private void atualizarDados(Cliente cliUp, Cliente cliente) {
 		cliUp.setNome(cliente.getNome());
+		cliUp.setCpfCnpj(cliUp.getCpfCnpj());
 		cliUp.setEmail(cliente.getEmail());
+		cliUp.setNascimento(cliUp.getNascimento());
 		cliUp.setSexo(cliente.getSexo());
 		cliUp.setFone(cliente.getFone());
 		cliUp.setCep(cliente.getCep());
+		cliUp.setNomeCidade(cliUp.getNomeCidade());
 		cliUp.setLogradouro(cliente.getLogradouro());
 		cliUp.setNumero(cliente.getNumero());
 		cliUp.setBairro(cliente.getBairro());
 		cliUp.setComplemento(cliente.getComplemento());
+		cliUp.setEstadoCivil(cliUp.getEstadoCivil());
 		cliUp.setStatus(cliente.getStatus());
 	}
 }
