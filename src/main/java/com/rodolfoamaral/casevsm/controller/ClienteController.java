@@ -2,10 +2,13 @@ package com.rodolfoamaral.casevsm.controller;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +25,7 @@ import com.rodolfoamaral.casevsm.servicos.ClienteServico;
 
 @RestController //indicar que é um recurso web de Clientes
 @RequestMapping(value = "/clientes")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ClienteController {
 	
 	@Autowired
@@ -34,7 +38,7 @@ public class ClienteController {
 		return servico.listarTodos();
 	}*/
 	
-	@GetMapping
+	@GetMapping("/listar")
 	public ResponseEntity<Page<Cliente>> listarTodos(FiltroDTO<Cliente> id, Pageable pageable) {
 		Page<Cliente> lista = servico.listarTodos(pageable);
 		return ResponseEntity.ok(lista);
@@ -46,7 +50,7 @@ public class ClienteController {
 		return ResponseEntity.ok().body(lista);
 	}
 	
-	@GetMapping(value = "/{cpfCnpj}")
+	@GetMapping(value = "/listar/{cpfCnpj}")
 	public ResponseEntity<Cliente> pesquisaDoc(@PathVariable String cpfCnpj){
 		Cliente nomeCli = servico.pesquisaCPF(cpfCnpj);
 		return ResponseEntity.ok().body(nomeCli);
@@ -54,7 +58,7 @@ public class ClienteController {
 	
 	//Cadastro
 	@PostMapping("/cadastrar")
-	public ResponseEntity<Cliente> cadastrar(@RequestBody Cliente cadCli){ //RequestBody = desserializar para um obj
+	public ResponseEntity<Cliente> cadastrar(@Valid @RequestBody Cliente cadCli){ //RequestBody = desserializar para um obj; @valid: validar os dados informados
 		cadCli = servico.cadastrarCliente(cadCli);
 		//gerar endereço do cliente cadastrado
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

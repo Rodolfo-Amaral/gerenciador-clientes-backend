@@ -29,7 +29,7 @@ public class CidadesController {
 	@Autowired
 	private CidadeServico servico;
 
-	@GetMapping
+	@GetMapping("/listar")
 	public ResponseEntity<Page<Cidades>> findAll(FiltroDTO<Cidades> id, Pageable pageable) {
 		Page<Cidades> lista = servico.findAll(pageable);
 		return ResponseEntity.ok().body(lista);
@@ -57,7 +57,7 @@ public class CidadesController {
 	}
 
 	// Editar
-	@PutMapping("/{id}")
+	@PutMapping("/editar/{id}")
 	public ResponseEntity<Cidades> editarTopico(@RequestBody Cidades cidade, @PathVariable Long id) {
 		Cidades editarCid = servico.atualizarCidades(id, cidade);		
 		BeanUtils.copyProperties(cidade, editarCid, "id");

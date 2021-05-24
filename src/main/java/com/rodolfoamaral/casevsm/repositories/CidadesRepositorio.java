@@ -12,4 +12,5 @@ public interface CidadesRepositorio extends JpaRepository<Cidades, Long> {
 
 	Optional<Cidades> findByNomeCidade(String nomeCidade);
 	Page<Cidades> findBySiglaEstado(Pageable pageable, String siglaEstado);
+	
 }

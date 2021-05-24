@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
@@ -27,12 +28,12 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
+	@NotEmpty
 	private String nome;
-	@NotNull
-	@Column(length = 14)
+	@NotEmpty
+	@Column(length = 18)
 	private String cpfCnpj;
-	@NotNull
+	@NotEmpty
 	@DateTimeFormat(iso = ISO.DATE, pattern = "dd/MM/yyyy")
 	@Column(name= "data_nascimento", nullable = false, columnDefinition = "DATE")
 	private LocalDate nascimento;
@@ -41,7 +42,7 @@ public class Cliente implements Serializable {
 	private String logradouro;
 	private Integer numero;
 	private String bairro;
-	@Column(length = 8)
+	@Column(length = 9)
 	private String cep;
 	
 	private String complemento;
